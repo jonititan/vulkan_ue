@@ -1,0 +1,10 @@
+services:
+  vulkan-ue:
+    build: .
+    environment:
+      - DISPLAY # Needed to share GPU
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix # Needed to share GPU
+    runtime: nvidia # Needed to share GPU
+    # tty: true
+    command: sh -c "nvidia-smi && lspci | grep ' VGA ' && vulkaninfo --summary && vkcube --gpu_number 1 && /home/ue5/UnrealEngine/Engine/Binaries/Linux/UnrealEditor"
